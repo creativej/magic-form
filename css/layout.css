@@ -1,0 +1,100 @@
+body {
+	background-color: #ddd;
+}
+
+.background {
+	/* Safari 5.1, Chrome 10+ */
+	background: -webkit-linear-gradient(top, #fff, #ddd);
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(top, #fff, #ddd);
+	/* IE 10 */
+	background: -ms-linear-gradient(top, #fff, #ddd);
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, #fff, #ddd);
+}
+
+#magicform .container {
+	width: 800px;
+}
+
+.main {
+	position: absolute;
+}
+
+form {
+	background-color: #fff;
+	width: 419px;
+	border: #DDD 2px solid;
+	padding: 20px 10px 10px;
+	border-radius: 5px 0 0 5px;
+	margin-top: 20px;
+}
+
+label.radio {
+	display: inline-block;
+	width: 50px;
+}
+
+ie7 label.radio {
+	display: inline;
+}
+
+input[type=text] {
+	width: 95%;
+}
+
+input.param {
+	text-align: left;
+}
+
+.params {
+	margin-top: 20px;
+}
+
+.params a {
+	text-align: right;
+    display: block;
+    width: 50px;
+    margin: 0 13px 0 auto;
+    text-align: right;
+}
+
+.params .clearfix {
+	margin-bottom: 10px;
+}
+
+.params input {
+	width: 46%;
+	margin-bottom: 0;
+}
+
+.form-actions input.btn {
+	float: right;
+	margin: 0 0 0 auto;
+}
+
+.response {
+	font-size: 85%;
+    margin-right: -2px;
+    position: absolute;
+    right: 14%;
+    width: 500px;
+}
+
+.response pre {
+    border-radius: 0 5px 5px 0;
+    min-height: 400px;
+    border-color: #ddd;
+    background-color: #ddd;
+}
+
+.arrowleft {
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right:10px solid #ddd;
+    margin-left: -9px;
+    margin-top: 23px;
+    position: absolute;
+}
