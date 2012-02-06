@@ -25,6 +25,7 @@
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/layout.css">
   <!-- end CSS-->
 
@@ -40,39 +41,48 @@
 <body id="magicform">
   <div class="background">
     <div class="container">
-      <h1>Magic form</h1>
       <div id="main" role="main">
+        <div class="leftcolumn">
+          <h1>Magic form</h1>
+          <form class="shadow" action="#">
+            <div class="clearfix">
+              <input data-bind="value: url" placeholder="Enter url address here" type="text"/>
+            </div>
+            <label class="radio"><input type="radio" name="type" value="GET" data-bind="checked: type"/>GET</label>
+
+            <label class="radio"><input type="radio" name="type" value="POST" data-bind="checked: type"/>POST</label>
+            <label class="checkbox"><input type="checkbox" data-bind="checked: json"/>Post with JSON data</label>
+            <div class="params">
+              <div data-bind="foreach: params">
+                <div class="clearfix">
+                  <input data-bind="value: name" placeholder="name" type="text"/>
+                  <input data-bind="value: value" placeholder="value" type="text"/>
+                  <a href="#" data-bind="click: $root.removeParam">remove</a>
+                </div>
+              </div>
+            </div>
+            <div class="actions">
+             <input type="button" data-bind="click: submit" class="btn-primary" value="Submit" />
+              <input type="button" data-bind="click: addParam" value="new param" class="btn param"/>
+            </div>
+          </form>
+        </div>
         <div class="response">
+          <div class="arrowleftborder"></div>
           <div class="arrowleft"></div>
-          <pre data-bind="text: response">
+          <div class="loader" data-bind="showPreloader: loading()"></div>
+          <pre data-bind="text: response, showResponse: loading()" >
 
           </pre>
         </div>
-        <form class="shadow">
-          <div class="clearfix">
-            <input data-bind="value: url" placeholder="Enter url address here" type="text"/>
-          </div>
-          <label class="radio"><input type="radio" name="type" value="GET" data-bind="checked: type"/>GET</label>
-
-          <label class="radio"><input type="radio" name="type" value="POST" data-bind="checked: type"/>POST</label>
-          <label class="checkbox"><input type="checkbox" data-bind="checked: json"/>Post with JSON data</label>
-          <div class="params">
-            <div data-bind="foreach: params">
-              <div class="clearfix">
-                <input data-bind="value: name" placeholder="name" type="text"/>
-                <input data-bind="value: value" placeholder="value" type="text"/>
-                <a href="#" data-bind="click: $root.removeParam">remove</a>
-              </div>
-            </div>
-          </div>
-          <div class="form-actions">
-           <input type="button" data-bind="click: submit" class="btn-primary" value="Submit" />
-            <input type="button" data-bind="click: addParam" value="new param" class="btn param"/>
-          </div>
-        </form>
       </div>
+      <footer>
+        Magic form by Jamison L<br/>
+        A form created for testing the <a href="http://developer.github.com/">github API</a>, but since it is so magical, you may use it to post to any url. <br/>
+        <span class="disclaimer">Disclaimer: Magic form is not subject to any abuse of this product.</span>
+      </footer>
     </div> <!--! end of #container -->
-  </div>
+  </div><!--! end of .background -->
 
   <!-- JavaScript at the bottom for fast page loading -->
 
