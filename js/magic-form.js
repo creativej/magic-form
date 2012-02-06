@@ -12,10 +12,11 @@
 		var self = this;
 
 		self.type = ko.observable("GET");
-		self.url = ko.observable("https://api.github.com/user/repos");
+		self.url = ko.observable();
 		self.params = ko.observableArray();
 		self.response = ko.observable("");
 		self.json = ko.observable(false);
+		self.loading = ko.observable(false);
 
 		self.addParam = function() {
 			self.params.push(new Item("", ""));
@@ -26,14 +27,17 @@
 		}
 
 		self.submit = function() {
+			self.loading(true);
+
 			var setting = {
-				url: self.url(),
+				url: formatUrl(self.url()),
 				type: self.type(),
 				crossDomain: true,
 				xhrFields: {
 					withCredentials: true
 				},
 				success: function(data){
+					self.loading(false);
 					self.response(data);
 				},
 				error: function(jqXHR){
@@ -46,6 +50,7 @@
 					});
 
 					self.response(msg);
+					self.loading(false);
 				}
 			}
 
@@ -53,8 +58,16 @@
 				setting.data = toSubmitData(self.params(), self.json());
 			}
 
-			var request = $.ajax(setting);
+			$.ajax(setting);
 		};
+
+		function formatUrl(url) {
+			if (url && url.match("^http:\/\/|^https:\/\/") === null) {
+				return "http://" + url;
+			} else {
+				return url;
+			}
+		}
 
 		function toSubmitData(array, isJSON) {
 			var data = {};
@@ -76,5 +89,25 @@
 
 	$(function(){
 		ko.applyBindings(new MagicFormViewModel());
+
+		ko.bindingHandlers.showPreloader = {
+			update: function(element, loading) {
+				if (loading()) {
+					$(element).fadeIn("slow");
+				} else {
+					$(element).fadeOut("slow");
+				}
+			}
+		}
+
+		ko.bindingHandlers.showResponse = {
+			update: function(element, loading) {
+				if (!loading()) {
+					$(element).delay(1000).fadeIn("slow");
+				} else {
+					$(element).hide();
+				}
+			}
+		}
 	});
 }(jQuery, ko));
